@@ -1060,4 +1060,13 @@ describe "math" do
       end
     end
   end
+
+  context "#positive_definite? for #{dtype}" do
+      it "should return true for positive_definite? matrix" do
+        n = NMatrix.new([3,3], [2, -1, -1,
+                                -1, 2, -1,
+                                -1, -1, 3], dtype: dtype)
+        expect(n.positive_definite?).to be_truthy
+      end
+  end
 end
