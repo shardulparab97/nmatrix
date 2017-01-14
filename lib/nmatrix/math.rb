@@ -1176,9 +1176,11 @@ class NMatrix
 
   alias :permute_columns  :laswp
   alias :permute_columns! :laswp!
+
+
   #
   # call-seq:
-  #     positive_definite -> boolean
+  #     positive_definite? -> boolean
   #
   # A matrix is positive definite if it’s symmetric and all its eigenvalues are positive
   #
@@ -1188,15 +1190,16 @@ class NMatrix
   #   - +ShapeError+ -> Must be used on square matrices.
   #
   def positive_definite?
-    raise(ShapeError, "positive definite calculated only for square matrices") unless self.dim == 2 && self.shape[0] == self.shape[1]
-    ans=true
-    cond=0
-    while cond!=self.cols
-      if((self[0..cond,0..cond].det<=0))
-        ans=false
+    raise(ShapeError, "positive definite calculated only for square matrices") unless 
+      self.dim == 2 && self.shape[0] == self.shape[1]
+    ans = true
+    cond = 0
+    while cond != self.cols
+      if self[0..cond, 0..cond].det <= 0
+        ans = false
         break
       end
-      cond+=1
+      cond += 1
     end
     ans
   end
